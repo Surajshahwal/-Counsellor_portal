@@ -252,8 +252,8 @@ This project is open-source and available under the [MIT License](LICENSE).
 **Suraj Kumar Shah**
 Java Full Stack Developer
 
-[![GitHub](https://img.shields.io/badge/GitHub-SurajKumarShah-black?style=flat&logo=github)](https://github.com/your-username)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)](https://linkedin.com/in/your-profile)
+[![GitHub](https://github.com/Surajshahwal)
+[![LinkedIn](www.linkedin.com/in/suraj-kumar-shah-600155271)
 
 ---
 
