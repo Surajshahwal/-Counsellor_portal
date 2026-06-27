@@ -1,264 +1,332 @@
 # 🎓 Counsellor Portal
 
-> A full-featured web application for managing student enquiries in a training institute — built with Spring Boot, Thymeleaf, and MySQL.
+> A Spring Boot web application for managing student enquiries in a training institute. The application enables counsellors to register, log in, manage student enquiries, update enquiry status, and monitor their performance through an interactive dashboard.
 
 ---
 
-## 📌 Project Overview
+# 📌 Project Overview
 
-**Counsellor Portal** is a real-time Spring Boot web application designed to streamline the student enquiry management process in training institutes. It provides counsellors with a centralized platform to register, authenticate, track student enquiries through their lifecycle, and gain actionable insights through a live dashboard.
+Counsellor Portal is a real-time web application developed using **Java, Spring Boot, Thymeleaf, Spring Data JPA, Hibernate, and MySQL**.
 
-Whether a student is just enquiring about a course or has already enrolled, the portal helps counsellors stay organized and respond efficiently — reducing manual effort and improving conversion tracking.
-
----
-
-## ✨ Features
-
-### 👤 Counsellor Management
-- Secure **Registration** with form validation
-- **Login & Logout** with session management
-- Profile-linked enquiry tracking
-
-### 📋 Enquiry Management
-- **Add New Enquiry** — capture student name, phone, course, and class mode
-- **View All Enquiries** — paginated list with sortable columns
-- **Filter Enquiries** — by Course Name and/or Status (Open / Enrolled / Lost)
-- **Update Enquiry Status** — move enquiries through the pipeline in real time
-
-### 📊 Dashboard & Reporting
-Real-time summary cards displaying:
-| Metric | Description |
-|--------|-------------|
-| 📁 Total Enquiries | All enquiries logged by the counsellor |
-| 🟡 Open Enquiries | Enquiries yet to be converted |
-| ✅ Enrolled Enquiries | Successfully converted students |
-| ❌ Lost Enquiries | Enquiries that did not convert |
+The system is designed to simplify the student enquiry management process within a training institute. Each counsellor can securely manage their own enquiries, track student progress, and monitor overall performance using a personalized dashboard.
 
 ---
 
-## 🛠️ Technologies Used
+# ✨ Features
 
-### Backend
-| Technology | Purpose |
-|------------|---------|
-| Java 17 | Core programming language |
-| Spring Boot | Application framework & auto-configuration |
-| Spring MVC | Web layer & REST/controller handling |
-| Spring Data JPA | ORM abstraction layer |
-| Hibernate | JPA implementation & database interaction |
-| Maven | Dependency management & build tool |
+## 👤 Counsellor Management
 
-### Frontend
-| Technology | Purpose |
-|------------|---------|
-| Thymeleaf | Server-side HTML templating engine |
-| HTML5 | Page structure |
-| CSS3 | Styling |
-| Bootstrap | Responsive UI components |
+* Counsellor Registration
+* Secure Login & Logout
+* Session Management
+* Individual Dashboard
 
-### Database & DevOps
-| Technology | Purpose |
-|------------|---------|
-| MySQL | Relational database |
-| Git & GitHub | Version control & source hosting |
+## 📋 Student Enquiry Management
+
+* Add New Student Enquiry
+* View All Enquiries
+* Filter Enquiries by Course
+* Filter Enquiries by Status
+* Update Enquiry Details
+* Change Enquiry Status
+
+  * Open
+  * Enrolled
+  * Lost
+
+## 📊 Dashboard Analytics
+
+Dashboard displays:
+
+* 📁 Total Enquiries
+* 🟡 Open Enquiries
+* ✅ Enrolled Enquiries
+* ❌ Lost Enquiries
 
 ---
 
-## 📂 Project Structure
+# 🛠️ Tech Stack
 
-```
-CounsellorPortal/
-├── src/
-│   └── main/
-│       ├── java/
-│       │   └── com/counsellorportal/
-│       │       ├── controller/       # MVC Controllers (web layer)
-│       │       ├── service/          # Business logic interfaces & implementations
-│       │       ├── repository/       # Spring Data JPA repositories
-│       │       ├── entity/           # JPA entity classes (DB table mappings)
-│       │       ├── dto/              # Data Transfer Objects
-│       │       ├── config/           # Spring Security / app configuration
-│       │       └── utils/            # Utility/helper classes
-│       └── resources/
-│           ├── templates/            # Thymeleaf HTML templates
-│           ├── static/               # CSS, JS, images
-│           └── application.properties
+## Backend
+
+* Java 17
+* Spring Boot
+* Spring MVC
+* Spring Data JPA
+* Hibernate
+* Maven
+
+## Frontend
+
+* Thymeleaf
+* HTML5
+* CSS3
+* Bootstrap
+
+## Database
+
+* MySQL
+
+## Tools
+
+* Git
+* GitHub
+* Eclipse / IntelliJ IDEA
+
+---
+
+# 📂 Project Structure
+
+```text
+Counsellor_portal
+│
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   ├── controller
+│   │   │   ├── service
+│   │   │   ├── repository
+│   │   │   ├── entity
+│   │   │   ├── dto
+│   │   │   └── exception
+│   │   │
+│   │   └── resources
+│   │       ├── templates
+│   │       ├── static
+│   │       └── application.properties
+│   │
+│   └── test
+│
+├── screenshots
 ├── pom.xml
 └── README.md
 ```
 
 ---
 
-## 🗄️ Database Design
+# 🗄️ Database Design
 
-### `counsellors_tbl`
-| Column | Type | Description |
-|--------|------|-------------|
-| `counsellor_id` | INT (PK) | Auto-generated primary key |
-| `name` | VARCHAR | Full name of the counsellor |
-| `email` | VARCHAR (UNIQUE) | Login email |
-| `pwd` | VARCHAR | Encrypted password |
-| `phno` | VARCHAR | Contact phone number |
-| `created_date` | DATE | Account creation date |
-| `updated_date` | DATE | Last profile update date |
+## counsellors_tbl
 
-### `enquiries_tbl`
-| Column | Type | Description |
-|--------|------|-------------|
-| `enq_id` | INT (PK) | Auto-generated enquiry ID |
-| `student_name` | VARCHAR | Full name of the student |
-| `student_phno` | VARCHAR | Student contact number |
-| `course_name` | VARCHAR | Course the student is enquiring about |
-| `class_mode` | VARCHAR | Offline / Online / Hybrid |
-| `enquiry_status` | ENUM | `OPEN` / `ENROLLED` / `LOST` |
-| `counsellor_id` | INT (FK) | Linked counsellor |
-| `created_date` | DATE | Date enquiry was created |
-| `updated_date` | DATE | Date of last status update |
-
-> **Relationship:** One counsellor can have many enquiries (`@OneToMany` — `counsellors_tbl` → `enquiries_tbl`).
+| Column        | Description         |
+| ------------- | ------------------- |
+| counsellor_id | Primary Key         |
+| name          | Counsellor Name     |
+| email         | Unique Email        |
+| pwd           | Password            |
+| phno          | Phone Number        |
+| created_date  | Record Created Date |
+| updated_date  | Record Updated Date |
 
 ---
 
-## ⚙️ Setup & Installation
+## enquiries_tbl
 
-### Prerequisites
-Make sure the following are installed on your system:
-- Java 17+
-- Maven 3.6+
-- MySQL 8.0+
-- Git
+| Column         | Description            |
+| -------------- | ---------------------- |
+| enq_id         | Primary Key            |
+| student_name   | Student Name           |
+| student_phno   | Student Phone Number   |
+| course_name    | Course Name            |
+| class_mode     | Online / Offline       |
+| enquiry_status | Open / Enrolled / Lost |
+| counsellor_id  | Foreign Key            |
+| created_date   | Record Created Date    |
+| updated_date   | Record Updated Date    |
 
-### Step-by-Step Setup
+### Relationship
 
-**1. Clone the Repository**
-```bash
-git clone https://github.com/your-username/counsellor-portal.git
-cd counsellor-portal
+```
+One Counsellor
+        │
+        │ 1
+        │
+        ▼
+Many Enquiries
 ```
 
-**2. Create the MySQL Database**
+---
+
+# ⚙️ Installation & Setup
+
+## Clone Repository
+
+```bash
+git clone https://github.com/Surajshahwal/-Counsellor_portal.git
+```
+
+Move into the project directory:
+
+```bash
+cd -Counsellor_portal
+```
+
+---
+
+## Configure Database
+
+Create a MySQL database:
+
 ```sql
 CREATE DATABASE counsellor_portal_db;
-USE counsellor_portal_db;
 ```
-Then run the provided SQL scripts (if any) to initialize schema and seed data.
 
-**3. Configure `application.properties`**
+Update `application.properties`:
 
-Update `src/main/resources/application.properties` with your database credentials:
 ```properties
-# Database Configuration
 spring.datasource.url=jdbc:mysql://localhost:3306/counsellor_portal_db
-spring.datasource.username=your_mysql_username
-spring.datasource.password=your_mysql_password
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.username=your_username
+spring.datasource.password=your_password
 
-# JPA / Hibernate
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
-
-# Server Port (optional)
-server.port=8080
 ```
 
-**4. Build & Run the Application**
+---
+
+## Run the Project
+
 ```bash
 mvn clean install
+```
+
+```bash
 mvn spring-boot:run
 ```
 
-**5. Access the Application**
+Application URL
 
-Open your browser and navigate to:
 ```
 http://localhost:8080
 ```
 
 ---
 
-## 📸 Application Screens
+# 📸 Application Screens
 
-| Screen | Description |
-|--------|-------------|
-| 🖊️ **Registration Page** | New counsellor sign-up with form validation |
+## 📝 Registration Page
 
-
-
-
-
-| 🔐 **Login Page** | Secure authentication with session creation |
-| 📊 **Dashboard** | Summary cards with live enquiry stats |
-| ➕ **Add Enquiry** | Form to capture a new student enquiry |
-| 📋 **View Enquiries** | Filterable, paginated table of all enquiries |
-| ✏️ **Update Enquiry** | Change enquiry status and update details |
-
----
-
-## 🔄 Application Flow
+> Add screenshot here
 
 ```
-User visits app
-     │
-     ▼
-[Registration / Login]
-     │
-     ▼
-[Dashboard] ──────────────────────────────────────┐
-     │                                             │
-     ▼                                             ▼
-[Add New Enquiry]                     [View / Filter Enquiries]
-     │                                             │
-     ▼                                             ▼
-[Enquiry Saved to DB]           [Update Status: OPEN → ENROLLED / LOST]
-     │                                             │
-     └────────────── Dashboard Refreshes ──────────┘
+screenshots/registration.png
 ```
 
 ---
 
-## 🚧 Future Enhancements
+## 🔐 Login Page
 
-- [ ] Role-based access control (Admin vs Counsellor)
-- [ ] Email notifications on status updates
-- [ ] Export enquiries to Excel/PDF
-- [ ] Pagination & sorting on enquiry list
-- [ ] REST API layer for mobile integration
-- [ ] Chart-based analytics on the dashboard
-- [ ] Forgot Password / OTP verification
+> Add screenshot here
+
+```
+screenshots/login.png
+```
 
 ---
 
-## 🤝 Contributing
+## 📊 Dashboard
 
-Contributions, bug reports, and feature requests are welcome!
+> Add screenshot here
+
+```
+screenshots/dashboard.png
+```
+
+---
+
+## ➕ Add Enquiry
+
+> Add screenshot here
+
+```
+screenshots/add-enquiry.png
+```
+
+---
+
+## 📋 View Enquiries
+
+> Add screenshot here
+
+```
+screenshots/view-enquiries.png
+```
+
+---
+
+## ✏️ Update Enquiry
+
+> Add screenshot here
+
+```
+screenshots/update-enquiry.png
+```
+
+---
+
+# 🔄 Application Flow
+
+```text
+Registration
+      │
+      ▼
+Login
+      │
+      ▼
+Dashboard
+      │
+      ├─────────────► Add Enquiry
+      │
+      ├─────────────► View Enquiries
+      │
+      ├─────────────► Filter Enquiries
+      │
+      └─────────────► Update Status
+                         │
+                         ▼
+                   Dashboard Updated
+```
+
+---
+
+# 🚀 Future Enhancements
+
+* Spring Security
+* Forgot Password
+* Email Notification
+* Excel Export
+* PDF Report
+* Pagination
+* Sorting
+* REST APIs
+* JWT Authentication
+* Docker Support
+* AWS Deployment
+
+---
+
+# 🤝 Contributing
+
+Contributions are always welcome.
 
 1. Fork the repository
-2. Create a new branch: `git checkout -b feature/your-feature-name`
-3. Commit your changes: `git commit -m "Add: your feature description"`
-4. Push to the branch: `git push origin feature/your-feature-name`
-5. Open a Pull Request
+2. Create a feature branch
+3. Commit your changes
+4. Push to your branch
+5. Create a Pull Request
 
 ---
 
-## 📄 License
-
-This project is open-source and available under the [MIT License](LICENSE).
-
----
-
-## 👨‍💻 Author
-
-## 👨‍💻 Author
+# 👨‍💻 Author
 
 **Suraj Kumar Shah**
 
 Java Full Stack Developer
 
-[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Surajshahwal)
+GitHub: https://github.com/Surajshahwal
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/suraj-kumar-shah-600155271/)
+LinkedIn: https://www.linkedin.com/in/suraj-kumar-shah-600155271/
 
 ---
 
-> ⭐ If you found this project helpful, please consider giving it a star on GitHub!
+⭐ If you like this project, don't forget to **Star** this repository.
