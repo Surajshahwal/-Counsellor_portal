@@ -1,14 +1,16 @@
 # 🎓 Counsellor Portal
 
-> A Spring Boot web application for managing student enquiries in a training institute. The application enables counsellors to register, log in, manage student enquiries, update enquiry status, and monitor their performance through an interactive dashboard.
+> A Spring Boot web application for managing student enquiries in a training institute. It enables counsellors to register, log in, manage student enquiries, update enquiry status, and monitor their performance through an interactive dashboard.
 
 ---
 
 # 📌 Project Overview
 
-Counsellor Portal is a real-time web application developed using **Java, Spring Boot, Thymeleaf, Spring Data JPA, Hibernate, and MySQL**.
+**Counsellor Portal** is a real-time web application built using **Java, Spring Boot, Spring MVC, Spring Data JPA, Hibernate, Thymeleaf, and MySQL**.
 
-The system is designed to simplify the student enquiry management process within a training institute. Each counsellor can securely manage their own enquiries, track student progress, and monitor overall performance using a personalized dashboard.
+The application is designed to simplify the student enquiry management process in a training institute. Counsellors can securely log in, manage student enquiries, track enquiry status, and monitor their overall performance through a personalized dashboard.
+
+This project demonstrates a complete CRUD application following the **MVC Architecture** using Spring Boot.
 
 ---
 
@@ -16,18 +18,17 @@ The system is designed to simplify the student enquiry management process within
 
 ## 👤 Counsellor Management
 
-* Counsellor Registration
+* New Counsellor Registration
 * Secure Login & Logout
 * Session Management
-* Individual Dashboard
+* Personalized Dashboard
 
 ## 📋 Student Enquiry Management
 
 * Add New Student Enquiry
 * View All Enquiries
-* Filter Enquiries by Course
-* Filter Enquiries by Status
-* Update Enquiry Details
+* Search & Filter Enquiries
+* Update Student Enquiry
 * Change Enquiry Status
 
   * Open
@@ -36,7 +37,7 @@ The system is designed to simplify the student enquiry management process within
 
 ## 📊 Dashboard Analytics
 
-Dashboard displays:
+The dashboard provides real-time statistics:
 
 * 📁 Total Enquiries
 * 🟡 Open Enquiries
@@ -61,17 +62,17 @@ Dashboard displays:
 * Thymeleaf
 * HTML5
 * CSS3
-* Bootstrap
+* Bootstrap 5
 
 ## Database
 
 * MySQL
 
-## Tools
+## Tools & IDE
 
+* Eclipse / IntelliJ IDEA
 * Git
 * GitHub
-* Eclipse / IntelliJ IDEA
 
 ---
 
@@ -82,20 +83,19 @@ Counsellor_portal
 │
 ├── src
 │   ├── main
-│   │   ├── java
-│   │   │   ├── controller
-│   │   │   ├── service
-│   │   │   ├── repository
-│   │   │   ├── entity
-│   │   │   ├── dto
-│   │   │   └── exception
-│   │   │
-│   │   └── resources
-│   │       ├── templates
-│   │       ├── static
-│   │       └── application.properties
 │   │
-│   └── test
+│   ├── java
+│   │   ├── controller
+│   │   ├── service
+│   │   ├── repository
+│   │   ├── entity
+│   │   ├── dto
+│   │   └── exception
+│   │
+│   └── resources
+│       ├── templates
+│       ├── static
+│       └── application.properties
 │
 ├── screenshots
 ├── pom.xml
@@ -134,28 +134,37 @@ Counsellor_portal
 | created_date   | Record Created Date    |
 | updated_date   | Record Updated Date    |
 
-### Relationship
+### Entity Relationship
 
-```
-One Counsellor
-        │
-        │ 1
-        │
-        ▼
-Many Enquiries
+```text
+Counsellor (1)
+       │
+       │
+       │
+       ▼
+Enquiry (Many)
 ```
 
 ---
 
 # ⚙️ Installation & Setup
 
+## Prerequisites
+
+Make sure the following software is installed:
+
+* Java 17+
+* Maven
+* MySQL
+* Git
+
+---
+
 ## Clone Repository
 
 ```bash
 git clone https://github.com/Surajshahwal/-Counsellor_portal.git
 ```
-
-Move into the project directory:
 
 ```bash
 cd -Counsellor_portal
@@ -165,13 +174,13 @@ cd -Counsellor_portal
 
 ## Configure Database
 
-Create a MySQL database:
+Create Database
 
 ```sql
 CREATE DATABASE counsellor_portal_db;
 ```
 
-Update `application.properties`:
+Update `application.properties`
 
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/counsellor_portal_db
@@ -184,19 +193,23 @@ spring.jpa.show-sql=true
 
 ---
 
-## Run the Project
+## Build Project
 
 ```bash
 mvn clean install
 ```
 
+---
+
+## Run Application
+
 ```bash
 mvn spring-boot:run
 ```
 
-Application URL
+Open Browser
 
-```
+```text
 http://localhost:8080
 ```
 
@@ -206,65 +219,41 @@ http://localhost:8080
 
 ## 📝 Registration Page
 
-> Add screenshot here
-
-```
-screenshots/registration.png
-```
+![Registration Page](screenshots/registration.png)
 
 ---
 
 ## 🔐 Login Page
 
-> Add screenshot here
-
-```
-screenshots/login.png
-```
+![Login Page](screenshots/login.png)
 
 ---
 
 ## 📊 Dashboard
 
-> Add screenshot here
-
-```
-screenshots/dashboard.png
-```
+![Dashboard](screenshots/dashboard.png)
 
 ---
 
 ## ➕ Add Enquiry
 
-> Add screenshot here
-
-```
-screenshots/add-enquiry.png
-```
+![Add Enquiry](screenshots/add-enquiry.png)
 
 ---
 
 ## 📋 View Enquiries
 
-> Add screenshot here
-
-```
-screenshots/view-enquiries.png
-```
+![View Enquiries](screenshots/view-enquiries.png)
 
 ---
 
 ## ✏️ Update Enquiry
 
-> Add screenshot here
-
-```
-screenshots/update-enquiry.png
-```
+![Update Enquiry](screenshots/update-enquiry.png)
 
 ---
 
-# 🔄 Application Flow
+# 🔄 Application Workflow
 
 ```text
 Registration
@@ -275,31 +264,30 @@ Login
       ▼
 Dashboard
       │
-      ├─────────────► Add Enquiry
+      ├────────► Add Enquiry
       │
-      ├─────────────► View Enquiries
+      ├────────► View Enquiries
       │
-      ├─────────────► Filter Enquiries
+      ├────────► Filter Enquiries
       │
-      └─────────────► Update Status
+      └────────► Update Enquiry Status
                          │
                          ▼
-                   Dashboard Updated
+                  Dashboard Statistics Updated
 ```
 
 ---
 
 # 🚀 Future Enhancements
 
-* Spring Security
+* Spring Security Authentication
+* JWT Authentication
 * Forgot Password
 * Email Notification
 * Excel Export
-* PDF Report
-* Pagination
-* Sorting
-* REST APIs
-* JWT Authentication
+* PDF Report Generation
+* Pagination & Sorting
+* REST API Development
 * Docker Support
 * AWS Deployment
 
@@ -307,12 +295,12 @@ Dashboard
 
 # 🤝 Contributing
 
-Contributions are always welcome.
+Contributions are welcome.
 
 1. Fork the repository
-2. Create a feature branch
+2. Create a new feature branch
 3. Commit your changes
-4. Push to your branch
+4. Push your branch
 5. Create a Pull Request
 
 ---
@@ -323,10 +311,11 @@ Contributions are always welcome.
 
 Java Full Stack Developer
 
-GitHub: https://github.com/Surajshahwal
-
-LinkedIn: https://www.linkedin.com/in/suraj-kumar-shah-600155271/
+* GitHub: https://github.com/Surajshahwal
+* LinkedIn: https://www.linkedin.com/in/suraj-kumar-shah-600155271/
 
 ---
 
-⭐ If you like this project, don't forget to **Star** this repository.
+## ⭐ Support
+
+If you found this project useful, please consider giving it a **⭐ Star** on GitHub.
